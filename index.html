@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA | Modern Select Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0f1115;
+      --card-bg: #161920;
+      --accent-color: #d4af37;
+      --text-main: #e6e8ec;
+      --text-muted: #8c92a0;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --font-en: 'Cormorant Garamond', serif;
+      --font-ja: 'Noto Sans JP', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-ja);
+      font-weight: 300;
+      line-height: 1.6;
+      letter-spacing: 0.05em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    a:hover {
+      opacity: 0.7;
+    }
+
+    /* --- Header --- */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 24px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 17, 21, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      font-family: var(--font-en);
+      font-size: 1.8rem;
+      letter-spacing: 0.2em;
+      font-weight: 400;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      background: radial-gradient(circle at center, rgba(30, 35, 45, 0.6) 0%, var(--bg-color) 70%);
+      margin-top: 60px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-en);
+      font-style: italic;
+      color: var(--accent-color);
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: var(--font-en);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      max-width: 480px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 1px solid var(--text-main);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--text-main);
+      color: var(--bg-color);
+    }
+
+    /* --- Products Section --- */
+    .section-title {
+      text-align: center;
+      padding: 80px 0 40px;
+    }
+
+    .section-title h2 {
+      font-family: var(--font-en);
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+    }
+
+    .products {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5% 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .product-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      transition: transform 0.4s ease, border-color 0.4s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.9);
+      transition: filter 0.3s ease;
+    }
+
+    .product-card:hover .product-img {
+      filter: brightness(1);
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-category {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .product-name {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .product-price {
+      font-family: var(--font-en);
+      font-size: 1.1rem;
+      color: var(--accent-color);
+    }
+
+    /* --- Footer --- */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 5%;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .hero { height: 75vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">AURA</div>
+    <nav>
+      <ul>
+        <li><a href="#new">New Arrivals</a></li>
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#cart">Cart (0)</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-subtitle">Essence of Minimalism</p>
+      <h1 class="hero-title">Timeless Objects<br>for Daily Life</h1>
+      <p class="hero-desc">洗練された造形美と静寂を日常に。厳選されたインテリア・アクセサリーを展開するセレクトショップ。</p>
+      <a href="#collection" class="btn">View Collection</a>
+    </section>
+
+    <div class="section-title" id="collection">
+      <h2>FEATURED ITEMS</h2>
+    </div>
+
+    <section class="products">
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80" alt="Ceramic Vase" class="product-img">
+        <div class="product-info">
+          <p class="product-category">Homeware</p>
+          <h3 class="product-name">Minimalist Ceramic Vase</h3>
+          <p class="product-price">¥12,800</p>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" alt="Fragrance Candle" class="product-img">
+        <div class="product-info">
+          <p class="product-category">Fragrance</p>
+          <h3 class="product-name">Botanical Soy Candle</h3>
+          <p class="product-price">¥6,500</p>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" alt="Glassware" class="product-img">
+        <div class="product-info">
+          <p class="product-category">Tableware</p>
+          <h3 class="product-name">Handblown Amber Glass</h3>
+          <p class="product-price">¥4,200</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 AURA. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
