@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>インカメラ撮影</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    video, canvas {
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>インカメラ撮影</h2>
+  
+  <!-- リアルタイム映像を表示する領域 -->
+  <video id="video" autoplay playsinline></video>
+  
+  <button id="capture-btn">撮影する</button>
+  
+  <!-- 撮影した静止画を描画する領域 -->
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const captureBtn = document.getElementById('capture-btn');
+    const context = canvas.getContext('2d');
+
+    // ページ読み込み時にフロントカメラへのアクセスを要求
+    async function initCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'user' }, // インカメラを指定 ('environment'でアウトカメラ)
+          audio: false
+        });
+        video.srcObject = stream;
+      } catch (err) {
+        alert('カメラのアクセス許可が得られなかったか、エラーが発生しました。');
+        console.error('カメラエラー:', err);
+      }
+    }
+
+    // ボタンをクリックした際に現在の映像フレームをCanvasに描画（撮影）
+    captureBtn.addEventListener('click', () => {
+      if (video.videoWidth > 0 && video.videoHeight > 0) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      }
+    });
+
+    // 初期化実行
+    initCamera();
+  </script>
+
+</body>
+</html>
